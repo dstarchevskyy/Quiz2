@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
         val root =
             DefaultRootComponent(
                 componentContext = defaultComponentContext(),
+                appContext = applicationContext
             )
 
         setContent {

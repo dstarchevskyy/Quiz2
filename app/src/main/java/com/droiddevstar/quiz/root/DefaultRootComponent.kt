@@ -1,6 +1,7 @@
 package com.droiddevstar.quiz.root
 
 import android.annotation.SuppressLint
+import android.content.Context
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -21,6 +22,7 @@ import kotlinx.parcelize.Parcelize
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
+    private val appContext: Context
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -58,7 +60,10 @@ class DefaultRootComponent(
 
     private fun tutorialComponent(
         componentContext: ComponentContext
-    ): TutorialComponent = TutorialComponentImpl(componentContext = componentContext)
+    ): TutorialComponent = TutorialComponentImpl(
+        componentContext = componentContext,
+        appContext = appContext
+    )
     private fun listComponent(componentContext: ComponentContext): ListComponent =
         DefaultListComponent(
             componentContext = componentContext,
