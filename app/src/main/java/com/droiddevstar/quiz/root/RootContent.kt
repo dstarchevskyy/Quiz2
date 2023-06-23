@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz
+package com.droiddevstar.quiz.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,6 +7,8 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
+import com.droiddevstar.quiz.details.DetailsContent
+import com.droiddevstar.quiz.list.ListContent
 
 @Composable
 fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {

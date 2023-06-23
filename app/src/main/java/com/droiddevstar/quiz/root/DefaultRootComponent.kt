@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz
+package com.droiddevstar.quiz.root
 
 import android.annotation.SuppressLint
 import com.arkivanov.decompose.ComponentContext
@@ -9,12 +9,14 @@ import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
+import com.droiddevstar.quiz.details.DefaultDetailsComponent
+import com.droiddevstar.quiz.list.DefaultListComponent
+import com.droiddevstar.quiz.details.DetailsComponent
+import com.droiddevstar.quiz.list.ListComponent
 import kotlinx.parcelize.Parcelize
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
-//    override val stack: Value<ChildStack<*, RootComponent.Child>>,
-//    override val stack: Value<ChildStack<*, RootComponent.Child>>
 ) : RootComponent, ComponentContext by componentContext  {
 
     private val navigation = StackNavigation<Config>()

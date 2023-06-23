@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz
+package com.droiddevstar.quiz.details
 
 import com.arkivanov.decompose.value.Value
 

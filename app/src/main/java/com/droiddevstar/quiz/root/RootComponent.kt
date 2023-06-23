@@ -1,8 +1,9 @@
-package com.droiddevstar.quiz
+package com.droiddevstar.quiz.root
 
-import com.arkivanov.decompose.Child
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
+import com.droiddevstar.quiz.details.DetailsComponent
+import com.droiddevstar.quiz.list.ListComponent
 
 interface RootComponent {
 
@@ -10,7 +11,7 @@ interface RootComponent {
 
     fun onBackClicked(toIndex: Int)
 
-    // Defines all possible child components
+
     sealed class Child {
         class ListChild(val component: ListComponent) : Child()
         class DetailsChild(val component: DetailsComponent) : Child()
