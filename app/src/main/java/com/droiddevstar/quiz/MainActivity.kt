@@ -10,11 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
 import com.droiddevstar.quiz.ui.theme.QuizTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Always create the root component outside Compose on the main thread
+        val root =
+            DefaultRootComponent(
+                componentContext = defaultComponentContext(),
+            )
+
         setContent {
             QuizTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    RootContent(component = root, modifier = Modifier.fillMaxSize())
                 }
             }
         }
