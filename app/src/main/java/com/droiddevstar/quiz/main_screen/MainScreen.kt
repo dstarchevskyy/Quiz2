@@ -28,7 +28,9 @@ import com.droiddevstar.quiz.ui.theme.QuizTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    component: MainScreenComponent
+) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -66,7 +68,9 @@ fun MainScreen() {
                 )
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        component.onItemClicked(NavItem.TUTORIAL)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = stringResource(id = R.string.tutorial))
@@ -101,6 +105,8 @@ fun MainScreen() {
 @Composable
 fun MainScreenPreview() {
     QuizTheme {
-        MainScreen()
+        MainScreen(
+            component = MainScreenComponentImpl { }
+        )
     }
 }

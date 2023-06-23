@@ -15,11 +15,13 @@ import com.droiddevstar.quiz.details.DetailsComponent
 import com.droiddevstar.quiz.list.ListComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
+import com.droiddevstar.quiz.tutorial.TutorialComponent
+import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
 import kotlinx.parcelize.Parcelize
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
-) : RootComponent, ComponentContext by componentContext  {
+) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
 
@@ -38,6 +40,7 @@ class DefaultRootComponent(
     private fun child(config: Config, componentContext: ComponentContext): RootComponent.Child =
         when (config) {
             is Config.MainScreen -> RootComponent.Child.MainChild(mainComponent(componentContext))
+            is Config.Tutorial -> RootComponent.Child.TutorialChild(tutorialComponent(componentContext))
             is Config.List -> RootComponent.Child.ListChild(listComponent(componentContext))
             is Config.Details -> RootComponent.Child.DetailsChild(
                 detailsComponent(
@@ -47,7 +50,15 @@ class DefaultRootComponent(
             )
         }
 
-    private fun mainComponent(componentContext: ComponentContext): MainScreenComponent = MainScreenComponentImpl()
+    private fun mainComponent(componentContext: ComponentContext): MainScreenComponent = MainScreenComponentImpl(
+        onButtonClicked = { navItem ->
+            navigation.push(Config.Tutorial)
+        }
+    )
+
+    private fun tutorialComponent(
+        componentContext: ComponentContext
+    ): TutorialComponent = TutorialComponentImpl(componentContext = componentContext)
     private fun listComponent(componentContext: ComponentContext): ListComponent =
         DefaultListComponent(
             componentContext = componentContext,
@@ -69,6 +80,9 @@ class DefaultRootComponent(
 
     @Parcelize // The `kotlin-parcelize` plugin must be applied if you are targeting Android
     private sealed interface Config : Parcelable {
+
+        @SuppressLint("ParcelCreator")
+        object Tutorial : Config
         @SuppressLint("ParcelCreator")
         object MainScreen : Config
 
