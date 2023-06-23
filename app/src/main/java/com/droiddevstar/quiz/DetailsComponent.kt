@@ -6,6 +6,8 @@ interface DetailsComponent {
 
     val model: Value<Model>
 
+
+
     data class Model(
         val item: String
     )

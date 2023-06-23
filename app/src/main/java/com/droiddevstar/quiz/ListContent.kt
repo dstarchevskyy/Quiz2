@@ -9,7 +9,6 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
-
 @Composable
 fun ListContent(
     component: ListComponent,
@@ -19,7 +18,11 @@ fun ListContent(
 
     LazyColumn {
         items(model.value.items) { item ->
-            Text(text = item.toString())
+            Text(
+                text = item,
+                modifier = Modifier.clickable {
+                    component.onItemClicked(item = item)
+            })
         }
     }
 }

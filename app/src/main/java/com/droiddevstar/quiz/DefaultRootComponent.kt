@@ -5,6 +5,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -52,9 +53,13 @@ class DefaultRootComponent(
     private fun detailsComponent(componentContext: ComponentContext, config: Config.Details): DetailsComponent =
         DefaultDetailsComponent(
             componentContext = componentContext,
-//            item = config.item, // Supply arguments from the configuration
+            item = config.item, // Supply arguments from the configuration
 //            onFinished = navigation::pop, // Pop the details component
         )
+
+    override fun onBackClicked(toIndex: Int) {
+        navigation.popTo(index = toIndex)
+    }
 
     @Parcelize // The `kotlin-parcelize` plugin must be applied if you are targeting Android
     private sealed interface Config : Parcelable {

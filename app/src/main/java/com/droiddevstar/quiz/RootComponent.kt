@@ -8,6 +8,8 @@ interface RootComponent {
 
     val stack: Value<ChildStack<*, Child>>
 
+    fun onBackClicked(toIndex: Int)
+
     // Defines all possible child components
     sealed class Child {
         class ListChild(val component: ListComponent) : Child()

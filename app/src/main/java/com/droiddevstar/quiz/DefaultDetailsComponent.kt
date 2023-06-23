@@ -5,8 +5,9 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 
 class DefaultDetailsComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val item: String
 ) : DetailsComponent {
     override val model: Value<DetailsComponent.Model>
-        get() = MutableValue(DetailsComponent.Model("asdf"))
+        get() = MutableValue(DetailsComponent.Model(item))
 }
