@@ -4,6 +4,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.droiddevstar.quiz.details.DetailsComponent
 import com.droiddevstar.quiz.list.ListComponent
+import com.droiddevstar.quiz.main_screen.MainScreenComponent
 
 interface RootComponent {
 
@@ -13,6 +14,7 @@ interface RootComponent {
 
 
     sealed class Child {
+        class MainChild(val component: MainScreenComponent): Child()
         class ListChild(val component: ListComponent) : Child()
         class DetailsChild(val component: DetailsComponent) : Child()
     }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Quiz</string>
+    <string name="app_full_name">World Geography Quiz</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="play_guess_capital_cities">Play: Guess capital cities</string>
+    <string name="play_guess_countries">Play: Guess countries</string>
+    <string name="exit">Exit</string>
 </resources>

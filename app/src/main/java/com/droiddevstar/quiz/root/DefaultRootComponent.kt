@@ -13,6 +13,8 @@ import com.droiddevstar.quiz.details.DefaultDetailsComponent
 import com.droiddevstar.quiz.list.DefaultListComponent
 import com.droiddevstar.quiz.details.DetailsComponent
 import com.droiddevstar.quiz.list.ListComponent
+import com.droiddevstar.quiz.main_screen.MainScreenComponent
+import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
 import kotlinx.parcelize.Parcelize
 
 class DefaultRootComponent(
@@ -24,7 +26,7 @@ class DefaultRootComponent(
     override val stack: Value<ChildStack<*, RootComponent.Child>> =
         childStack(
             source = navigation,
-            initialConfiguration = Config.List, // The initial child component is List
+            initialConfiguration = Config.MainScreen, // The initial child component is List
             handleBackButton = true, // Automatically pop from the stack on back button presses
             childFactory = ::child,
         )
@@ -35,6 +37,7 @@ class DefaultRootComponent(
 
     private fun child(config: Config, componentContext: ComponentContext): RootComponent.Child =
         when (config) {
+            is Config.MainScreen -> RootComponent.Child.MainChild(mainComponent(componentContext))
             is Config.List -> RootComponent.Child.ListChild(listComponent(componentContext))
             is Config.Details -> RootComponent.Child.DetailsChild(
                 detailsComponent(
@@ -44,6 +47,7 @@ class DefaultRootComponent(
             )
         }
 
+    private fun mainComponent(componentContext: ComponentContext): MainScreenComponent = MainScreenComponentImpl()
     private fun listComponent(componentContext: ComponentContext): ListComponent =
         DefaultListComponent(
             componentContext = componentContext,
@@ -66,7 +70,11 @@ class DefaultRootComponent(
     @Parcelize // The `kotlin-parcelize` plugin must be applied if you are targeting Android
     private sealed interface Config : Parcelable {
         @SuppressLint("ParcelCreator")
+        object MainScreen : Config
+
+        @SuppressLint("ParcelCreator")
         object List : Config
+
         @SuppressLint("ParcelCreator")
         data class Details(val item: String) : Config
     }
