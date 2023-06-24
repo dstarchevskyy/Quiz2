@@ -10,14 +10,46 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import com.arkivanov.decompose.defaultComponentContext
+import com.droiddevstar.quiz.retrofit.JokeApi
+import com.droiddevstar.quiz.retrofit.JokesApiImpl
+import com.droiddevstar.quiz.retrofit.JokesRepositoryImpl
+import com.droiddevstar.quiz.retrofit.RetrofitApiFactory
+import com.droiddevstar.quiz.retrofit.RetrofitJokeApi
 import com.droiddevstar.quiz.root.DefaultRootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : ComponentActivity() {
+class MainActivity() : ComponentActivity(), CoroutineScope {
+    private lateinit var job: Job
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        job = Job()
+
+        val retrofitJokeApi = RetrofitApiFactory.jokeApiService
+        val jokeApi: JokeApi = JokesApiImpl(retrofitJokeApi)
+
+        launch {
+            JokesRepositoryImpl(jokeApi).getJoke()
+                .catch {
+                    println("@@@catch: $it")
+                }
+                .collect {
+                    println("@@@collect: $it")
+                }
+        }
+
         // Always create the root component outside Compose on the main thread
         val root =
             DefaultRootComponent(
@@ -37,6 +69,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override val coroutineContext: CoroutineContext
+        get() =  Dispatchers.Main + job
 }
 
 @Composable
