@@ -53,6 +53,10 @@ dependencyResolutionManagement {
                     .version('1.4.3')
             library('composeUiTestManifest', 'androidx.compose.ui', 'ui-test-manifest')
                     .version('1.4.3')
+            library('kotlinPlatform', 'org.jetbrains.kotlin', 'kotlin-bom')
+                    .version('1.8.0')
+            library('composePlatform', 'androidx.compose', 'compose-bom')
+                    .version('2022.10.00')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

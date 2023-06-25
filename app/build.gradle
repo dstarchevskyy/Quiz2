@@ -50,10 +50,10 @@ android {
 dependencies {
 
     implementation(libs.androidXCore)
-    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
+    implementation platform(libs.kotlinPlatform)
     implementation(libs.androidXLifecycle)
     implementation(libs.androidXActivityCompose)
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation platform(libs.composePlatform)
     implementation(libs.androidXComposeUi)
     implementation(libs.androidXComposeUiGraphics)
     implementation(libs.androidXComposeUiToolingPreview)
@@ -77,7 +77,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.esporesso)
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
+    androidTestImplementation platform(libs.composePlatform)
     androidTestImplementation(libs.composeTestJUnit)
     debugImplementation(libs.composeUiTooling)
     debugImplementation(libs.composeUiTestManifest)
