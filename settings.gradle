@@ -38,6 +38,21 @@ dependencyResolutionManagement {
                     .version('1.6.4')
             library('kotlinXCoroutinesCore', 'org.jetbrains.kotlinx', 'kotlinx-coroutines-core')
                     .version('1.6.4')
+
+            library('junit', 'junit', 'junit')
+                    .version('4.13.2')
+            library('androidXTestJunit', 'androidx.test.ext', 'junit')
+                    .version('1.1.5')
+            library('esporesso', 'androidx.test.espresso', 'espresso-core')
+                    .version('3.5.1')
+            library('esporesso', 'androidx.test.espresso', 'espresso-core')
+                    .version('3.5.1')
+            library('composeTestJUnit', 'androidx.compose.ui', 'ui-test-junit4')
+                    .version('1.4.1')
+            library('composeUiTooling', 'androidx.compose.ui', 'ui-tooling')
+                    .version('1.4.3')
+            library('composeUiTestManifest', 'androidx.compose.ui', 'ui-test-manifest')
+                    .version('1.4.3')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
