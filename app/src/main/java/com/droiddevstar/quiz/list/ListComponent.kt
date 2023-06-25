@@ -7,6 +7,8 @@ interface ListComponent {
 
     fun onItemClicked(item: String)
 
+    fun onLoadClicked()
+
     data class Model(
         val items: List<String>,
     )

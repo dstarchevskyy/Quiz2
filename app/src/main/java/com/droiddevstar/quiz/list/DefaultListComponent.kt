@@ -8,6 +8,7 @@ import com.droiddevstar.quiz.list.ListComponent
 class DefaultListComponent(
     componentContext: ComponentContext,
     private val onItemSelected: (item: String) -> Unit,
+    private val onLoad: () -> Unit
 ) : ListComponent {
     override val model: Value<ListComponent.Model> =
         MutableValue(
@@ -17,5 +18,10 @@ class DefaultListComponent(
 
     override fun onItemClicked(item: String) {
         onItemSelected(item)
+    }
+
+    override fun onLoadClicked() {
+        println("@@@onLoadClicked()")
+        onLoad()
     }
 }

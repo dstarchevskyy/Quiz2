@@ -60,9 +60,9 @@ class MainActivity() : ComponentActivity(), CoroutineScope {
                 ) {
                     RootContent(component = root, modifier = Modifier.fillMaxWidth())
 
-                    Button(onClick = { getJoke() }) {
-                        Text(text = "My text")
-                    }
+//                    Button(onClick = { getJoke() }) {
+//                        Text(text = "My text")
+//                    }
                 }
             }
         }
