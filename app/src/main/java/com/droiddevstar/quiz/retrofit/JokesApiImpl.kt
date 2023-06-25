@@ -10,5 +10,3 @@ class JokesApiImpl(private val retrofitJokeApi: RetrofitJokeApi) : JokeApi {
 }
 
 const val BASE_URL = "https://geek-jokes.sameerkumar.website/"
-//const val BASE_URL = "https://dummyjson.com/"
-

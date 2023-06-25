@@ -14,8 +14,6 @@ object RetrofitApiFactory {
 
     private fun getOkHttp(): OkHttpClient {
         return  OkHttpClient.Builder()
-//            .addInterceptor(MyInterceptor())
-            .authenticator(TokenAuthenticator())
             .connectTimeout(3.toLong(), TimeUnit.SECONDS)
             .readTimeout(3.toLong(), TimeUnit.SECONDS)
         .build()
@@ -27,7 +25,6 @@ object RetrofitApiFactory {
         .client(getOkHttp())
         .build()
 
-    val jokeApiService = getRetrofit().create(RetrofitJokeApi::class.java)
-
+    val jokeApiService: RetrofitJokeApi = getRetrofit().create(RetrofitJokeApi::class.java)
 
 }
