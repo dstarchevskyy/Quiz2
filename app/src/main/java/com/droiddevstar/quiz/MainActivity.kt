@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -32,23 +34,15 @@ import kotlin.coroutines.CoroutineContext
 
 class MainActivity() : ComponentActivity(), CoroutineScope {
     private lateinit var job: Job
+
+    lateinit var jokeApi: JokeApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         job = Job()
 
         val retrofitJokeApi = RetrofitApiFactory.jokeApiService
-        val jokeApi: JokeApi = JokesApiImpl(retrofitJokeApi)
-
-        launch {
-            JokesRepositoryImpl(jokeApi).getJoke()
-                .catch {
-                    println("@@@catch: $it")
-                }
-                .collect {
-                    println("@@@collect: $it")
-                }
-        }
+        jokeApi = JokesApiImpl(retrofitJokeApi)
 
         // Always create the root component outside Compose on the main thread
         val root =
@@ -64,7 +58,11 @@ class MainActivity() : ComponentActivity(), CoroutineScope {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RootContent(component = root, modifier = Modifier.fillMaxSize())
+                    RootContent(component = root, modifier = Modifier.fillMaxWidth())
+
+                    Button(onClick = { getJoke() }) {
+                        Text(text = "My text")
+                    }
                 }
             }
         }
@@ -72,6 +70,18 @@ class MainActivity() : ComponentActivity(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() =  Dispatchers.Main + job
+
+    private fun getJoke() {
+        launch {
+            JokesRepositoryImpl(jokeApi).getJoke()
+                .catch {
+                    println("@@@catch: $it")
+                }
+                .collect {
+                    println("@@@collect: $it")
+                }
+        }
+    }
 }
 
 @Composable
