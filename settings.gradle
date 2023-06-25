@@ -14,6 +14,12 @@ dependencyResolutionManagement {
                     .version('2.6.1')
             library('androidXActivityCompose', 'androidx.activity', 'activity-compose')
                     .version('1.7.2')
+            library('androidXComposeUi', 'androidx.compose.ui', 'ui-android')
+                    .version('1.6.0-alpha01')
+            library('androidXComposeUiGraphics', 'androidx.compose.ui', 'ui-graphics-android')
+                    .version('1.6.0-alpha01')
+            library('androidXComposeUiToolingPreview', 'androidx.compose.ui', 'ui-tooling-preview-android')
+                    .version('1.6.0-alpha01')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
