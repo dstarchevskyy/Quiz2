@@ -12,6 +12,8 @@ dependencyResolutionManagement {
             library('androidXCore', 'androidx.core', 'core-ktx').version('1.10.1')
             library('androidXLifecycle', 'androidx.lifecycle', 'lifecycle-runtime-ktx')
                     .version('2.6.1')
+            library('androidXActivityCompose', 'androidx.activity', 'activity-compose')
+                    .version('1.7.2')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
