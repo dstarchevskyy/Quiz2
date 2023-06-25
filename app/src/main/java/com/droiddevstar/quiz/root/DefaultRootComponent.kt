@@ -19,6 +19,7 @@ import com.droiddevstar.quiz.retrofit.JokesApiImpl
 import com.droiddevstar.quiz.retrofit.RetrofitApiFactory
 import com.droiddevstar.quiz.tutorial.TutorialComponent
 import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 
 class DefaultRootComponent(
@@ -26,7 +27,7 @@ class DefaultRootComponent(
     private val appContext: Context
 ) : RootComponent, ComponentContext by componentContext {
 
-    lateinit var jokeApi: JokeApi
+    val jokeApi: JokeApi =  JokesApiImpl(RetrofitApiFactory.jokeApiService)
 
     private val navigation = StackNavigation<Config>()
 
@@ -41,9 +42,6 @@ class DefaultRootComponent(
 
     init {
         println("DefaultRootComponent")
-
-        val retrofitJokeApi = RetrofitApiFactory.jokeApiService
-        jokeApi = JokesApiImpl(retrofitJokeApi)
     }
 
     private fun child(config: Config, componentContext: ComponentContext): RootComponentChild =
@@ -74,6 +72,8 @@ class DefaultRootComponent(
     private fun listComponent(componentContext: ComponentContext): ListComponent =
         DefaultListComponent(
             componentContext = componentContext,
+            mainContext = Dispatchers.IO,
+            jokeApi = jokeApi,
             onItemSelected = { item: String -> // Supply dependencies and callbacks
                 navigation.push(Config.Details(item = item)) // Push the details component
             },
