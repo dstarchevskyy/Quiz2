@@ -1,5 +1,8 @@
 package com.droiddevstar.quiz.list
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
@@ -29,12 +32,14 @@ class DefaultListComponent(
     // The scope is automatically cancelled when the component is destroyed
     private val scope = coroutineScope(mainContext + SupervisorJob())
 
+    private val jokeState: MutableState<JokeModel> = mutableStateOf<JokeModel>(JokeModel(""))
 
     override val model: Value<ListComponent.Model> =
         MutableValue(
             ListComponent.Model(
             items = List(100
-            ) { "Item $it" }))
+            ) { "Item $it" },
+            stateDate = jokeState))
 
     override fun onItemClicked(item: String) {
         onItemSelected(item)
@@ -47,6 +52,7 @@ class DefaultListComponent(
         scope.launch {
             jokeFlow.collectLatest {
                 println("@@@DefaultListComponent:collectLatest: $it ")
+                jokeState.value = it
             }
         }
     }

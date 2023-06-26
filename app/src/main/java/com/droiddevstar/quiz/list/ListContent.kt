@@ -1,5 +1,6 @@
 package com.droiddevstar.quiz.list
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,11 +10,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
+import com.droiddevstar.quiz.retrofit.JokeModel
 
 @Composable
 fun ListContent(
@@ -27,6 +30,8 @@ fun ListContent(
         Button(onClick = { component.onLoadClicked() }) {
             Text(text = "Load")
         }
+
+        Text(text = "CURRENT JOKE: ${model.value.stateDate.value.joke}")
 
         LazyColumn {
             items(model.value.items) { item ->
@@ -45,11 +50,13 @@ fun ListContent(
 fun previewListContent() {
     ListContent(
         component = object : ListComponent {
+            @SuppressLint("UnrememberedMutableState")
             override val model: Value<ListComponent.Model> = MutableValue(
                 ListComponent.Model(
                     items = List(100) {
                         "Item $it"
-                    }
+                    },
+                    stateDate = mutableStateOf<JokeModel>(JokeModel(""))
                 )
             )
 
