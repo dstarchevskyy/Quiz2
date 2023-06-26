@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -47,6 +49,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.androidXCore)
@@ -81,4 +84,7 @@ dependencies {
     androidTestImplementation(libs.composeTestJUnit)
     debugImplementation(libs.composeUiTooling)
     debugImplementation(libs.composeUiTestManifest)
+
+    implementation(libs.hiltAndroid)
+    kapt(libs.hiltCompiles)
 }

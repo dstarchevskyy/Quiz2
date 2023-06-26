@@ -1,7 +1,6 @@
 package com.droiddevstar.quiz.list
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
@@ -9,18 +8,15 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
-import com.droiddevstar.quiz.list.ListComponent
 import com.droiddevstar.quiz.retrofit.JokeApi
 import com.droiddevstar.quiz.retrofit.JokeModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 
 class DefaultListComponent(
     private val componentContext: ComponentContext,

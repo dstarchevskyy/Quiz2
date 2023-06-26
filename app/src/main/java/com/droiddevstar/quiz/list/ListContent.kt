@@ -23,7 +23,7 @@ fun ListContent(
     component: ListComponent,
     modifier: Modifier = Modifier
 ) {
-    val model: State<ListComponent.Model> = component.model.subscribeAsState()
+    val model: State<ListComponentModel> = component.model.subscribeAsState()
 
     Column(Modifier.fillMaxSize()) {
 
@@ -51,8 +51,8 @@ fun previewListContent() {
     ListContent(
         component = object : ListComponent {
             @SuppressLint("UnrememberedMutableState")
-            override val model: Value<ListComponent.Model> = MutableValue(
-                ListComponent.Model(
+            override val model: Value<ListComponentModel> = MutableValue(
+                ListComponentModel(
                     items = List(100) {
                         "Item $it"
                     },

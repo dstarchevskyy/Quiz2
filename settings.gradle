@@ -57,6 +57,11 @@ dependencyResolutionManagement {
                     .version('1.8.0')
             library('composePlatform', 'androidx.compose', 'compose-bom')
                     .version('2022.10.00')
+
+            library('hiltAndroid', 'com.google.dagger', 'hilt-android')
+                    .version('2.46.1')
+            library('hiltCompiles', 'com.google.dagger', 'hilt-compiler')
+                    .version('2.46.1')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
