@@ -34,12 +34,12 @@ class DefaultListComponent(
 
     private val jokeState: MutableState<JokeModel> = mutableStateOf<JokeModel>(JokeModel(""))
 
-    override val model: Value<ListComponent.Model> =
+    override val model: Value<ListComponentModel> =
         MutableValue(
-            ListComponent.Model(
-            items = List(100
-            ) { "Item $it" },
-            stateDate = jokeState))
+            ListComponentModel(
+                items = List(100) { "Item $it" },
+                stateDate = jokeState)
+        )
 
     override fun onItemClicked(item: String) {
         onItemSelected(item)
