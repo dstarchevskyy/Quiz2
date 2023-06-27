@@ -18,9 +18,10 @@ import com.droiddevstar.quiz.network.JokeApi
 import com.droiddevstar.quiz.tutorial.TutorialComponent
 import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-class DefaultRootComponent(
-    componentContext: ComponentContext,
+class DefaultRootComponent @Inject constructor(
+    val componentContext: ComponentContext,
     val appContext: Context,
     val jokeApi: JokeApi
 ) : RootComponent, ComponentContext by componentContext {

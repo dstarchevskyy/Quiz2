@@ -8,10 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.defaultComponentContext
-import com.droiddevstar.quiz.network.JokeApi
-import com.droiddevstar.quiz.network.JokesApiImpl
-import com.droiddevstar.quiz.root.DefaultRootComponent
+import com.droiddevstar.quiz.root.RootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,24 +22,14 @@ import kotlin.coroutines.CoroutineContext
 class MainActivity : ComponentActivity(), CoroutineScope {
 
     @Inject
-    lateinit var jokeApi: JokeApi
+    lateinit var rootComponent: RootComponent
 
     private lateinit var job: Job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        println("@@@jokeApi: $jokeApi")
-
         job = Job()
-
-        // Always create the root component outside Compose on the main thread
-        val root =
-            DefaultRootComponent(
-                componentContext = defaultComponentContext(),
-                appContext = applicationContext,
-                jokeApi = jokeApi
-            )
 
         setContent {
             QuizTheme {
@@ -51,7 +38,10 @@ class MainActivity : ComponentActivity(), CoroutineScope {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RootContent(component = root, modifier = Modifier.fillMaxWidth())
+                    RootContent(
+                        component = rootComponent,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }
