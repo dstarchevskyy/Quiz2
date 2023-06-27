@@ -9,6 +9,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
+import com.droiddevstar.quiz.network.JokeApi
+import com.droiddevstar.quiz.network.JokesApiImpl
+import com.droiddevstar.quiz.network.RetrofitApiFactory
 import com.droiddevstar.quiz.root.DefaultRootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
@@ -31,7 +34,8 @@ class MainActivity : ComponentActivity(), CoroutineScope {
         val root =
             DefaultRootComponent(
                 componentContext = defaultComponentContext(),
-                appContext = applicationContext
+                appContext = applicationContext,
+                jokeApi = JokesApiImpl(RetrofitApiFactory.jokeApiService)
             )
 
         setContent {

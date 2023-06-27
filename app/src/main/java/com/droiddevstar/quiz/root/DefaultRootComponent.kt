@@ -23,10 +23,11 @@ import kotlinx.coroutines.Dispatchers
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
-    private val appContext: Context
+    val appContext: Context,
+    val jokeApi: JokeApi
 ) : RootComponent, ComponentContext by componentContext {
 
-    val jokeApi: JokeApi =  JokesApiImpl(RetrofitApiFactory.jokeApiService)
+//    val jokeApi: JokeApi =  JokesApiImpl(RetrofitApiFactory.jokeApiService)
 
     private val navigation = StackNavigation<Config>()
 
