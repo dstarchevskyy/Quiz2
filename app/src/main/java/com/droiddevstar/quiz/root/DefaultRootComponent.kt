@@ -15,8 +15,6 @@ import com.droiddevstar.quiz.list.ListComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
 import com.droiddevstar.quiz.network.JokeApi
-import com.droiddevstar.quiz.network.JokesApiImpl
-import com.droiddevstar.quiz.network.RetrofitApiFactory
 import com.droiddevstar.quiz.tutorial.TutorialComponent
 import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
 import kotlinx.coroutines.Dispatchers

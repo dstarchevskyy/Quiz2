@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
 import com.droiddevstar.quiz.network.JokeApi
 import com.droiddevstar.quiz.network.JokesApiImpl
-import com.droiddevstar.quiz.network.RetrofitApiFactory
 import com.droiddevstar.quiz.root.DefaultRootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
@@ -19,14 +18,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(), CoroutineScope {
+
+    @Inject
+    lateinit var jokeApi: JokeApi
+
     private lateinit var job: Job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        println("@@@jokeApi: $jokeApi")
 
         job = Job()
 
@@ -35,7 +41,7 @@ class MainActivity : ComponentActivity(), CoroutineScope {
             DefaultRootComponent(
                 componentContext = defaultComponentContext(),
                 appContext = applicationContext,
-                jokeApi = JokesApiImpl(RetrofitApiFactory.jokeApiService)
+                jokeApi = jokeApi
             )
 
         setContent {
