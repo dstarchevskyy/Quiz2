@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface JokeApi {
 
     fun fetchJoke(): Flow<JokeModel>
+
 }

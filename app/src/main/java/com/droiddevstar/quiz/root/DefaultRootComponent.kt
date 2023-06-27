@@ -25,8 +25,6 @@ class DefaultRootComponent(
     val jokeApi: JokeApi
 ) : RootComponent, ComponentContext by componentContext {
 
-//    val jokeApi: JokeApi =  JokesApiImpl(RetrofitApiFactory.jokeApiService)
-
     private val navigation = StackNavigation<Config>()
 
     override val stack: Value<ChildStack<*, RootComponentChild>> =
