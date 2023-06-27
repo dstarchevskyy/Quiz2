@@ -8,8 +8,8 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
-import com.droiddevstar.quiz.retrofit.JokeApi
-import com.droiddevstar.quiz.retrofit.JokeModel
+import com.droiddevstar.quiz.coreapi.JokeModel
+import com.droiddevstar.quiz.network.JokeApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
@@ -18,13 +18,13 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class DefaultListComponent(
+class ListComponentImpl(
     private val componentContext: ComponentContext,
     mainContext: CoroutineContext,
     private val jokeApi: JokeApi,
     private val onItemSelected: (item: String) -> Unit,
-    private val onLoad: () -> Unit
-) : ListComponent, ComponentContext by componentContext {
+) : ListComponent, ComponentContext by componentContext
+{
     // The scope is automatically cancelled when the component is destroyed
     private val scope = coroutineScope(mainContext + SupervisorJob())
 

@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import com.droiddevstar.quiz.retrofit.JokeModel
+import com.droiddevstar.quiz.coreapi.JokeModel
 
 @Composable
 fun ListContent(

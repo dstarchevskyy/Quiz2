@@ -25,6 +25,7 @@ object RetrofitApiFactory {
         .client(getOkHttp())
         .build()
 
-    val jokeApiService: RetrofitJokeApi = getRetrofit().create(RetrofitJokeApi::class.java)
+    val jokeApiService: RetrofitJokeApi = getRetrofit()
+        .create(RetrofitJokeApi::class.java)
 
 }

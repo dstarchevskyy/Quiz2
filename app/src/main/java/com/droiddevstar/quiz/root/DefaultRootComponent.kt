@@ -10,17 +10,16 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.droiddevstar.quiz.details.DefaultDetailsComponent
 import com.droiddevstar.quiz.details.DetailsComponent
-import com.droiddevstar.quiz.list.DefaultListComponent
+import com.droiddevstar.quiz.list.ListComponentImpl
 import com.droiddevstar.quiz.list.ListComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
-import com.droiddevstar.quiz.retrofit.JokeApi
+import com.droiddevstar.quiz.network.JokeApi
 import com.droiddevstar.quiz.retrofit.JokesApiImpl
 import com.droiddevstar.quiz.retrofit.RetrofitApiFactory
 import com.droiddevstar.quiz.tutorial.TutorialComponent
 import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 
 class DefaultRootComponent(
     componentContext: ComponentContext,
@@ -34,7 +33,6 @@ class DefaultRootComponent(
     override val stack: Value<ChildStack<*, RootComponentChild>> =
         childStack(
             source = navigation,
-//            initialConfiguration = Config.MainScreen, // The initial child component is List
             initialConfiguration = Config.List, // The initial child component is List
             handleBackButton = true, // Automatically pop from the stack on back button presses
             childFactory = ::child,
@@ -70,16 +68,13 @@ class DefaultRootComponent(
         appContext = appContext
     )
     private fun listComponent(componentContext: ComponentContext): ListComponent =
-        DefaultListComponent(
+        ListComponentImpl(
             componentContext = componentContext,
             mainContext = Dispatchers.IO,
             jokeApi = jokeApi,
             onItemSelected = { item: String -> // Supply dependencies and callbacks
                 navigation.push(Config.Details(item = item)) // Push the details component
             },
-            onLoad = {
-                println("@@@onLoad")
-            }
         )
 
     private fun detailsComponent(componentContext: ComponentContext, config: Config.Details): DetailsComponent =

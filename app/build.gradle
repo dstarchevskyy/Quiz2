@@ -87,4 +87,6 @@ dependencies {
 
     implementation(libs.hiltAndroid)
     kapt(libs.hiltCompiles)
+
+    implementation(project(':network'))
 }
