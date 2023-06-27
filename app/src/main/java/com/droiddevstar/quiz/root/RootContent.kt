@@ -13,7 +13,10 @@ import com.droiddevstar.quiz.main_screen.MainScreen
 import com.droiddevstar.quiz.tutorial.TutorialScreen
 
 @Composable
-fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
+fun RootContent(
+    component: RootComponent,
+    modifier: Modifier = Modifier
+) {
     Children(
         stack = component.stack,
         modifier = modifier,

@@ -9,6 +9,4 @@ interface RootComponent {
 
     fun onBackClicked(toIndex: Int)
 
-
-
 }
