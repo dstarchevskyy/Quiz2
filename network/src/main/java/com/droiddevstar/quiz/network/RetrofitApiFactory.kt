@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz.retrofit
+package com.droiddevstar.quiz.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

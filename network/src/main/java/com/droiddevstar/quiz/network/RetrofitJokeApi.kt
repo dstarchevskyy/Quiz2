@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz.retrofit
+package com.droiddevstar.quiz.network
 
 import com.droiddevstar.quiz.coreapi.JokeModel
 import retrofit2.http.GET

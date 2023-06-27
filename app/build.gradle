@@ -68,14 +68,9 @@ dependencies {
 
     implementation(libs.okHttpLogInterceptor)
 
-    implementation(libs.converterMoshi)
-    implementation(libs.kotlinMoshi)
-
     implementation(libs.kotlinXCoroutinesAndroid)
     implementation(libs.kotlinXCoroutinesCore)
 
-
-    implementation(libs.retrofit2)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)

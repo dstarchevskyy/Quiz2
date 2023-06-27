@@ -1,11 +1,12 @@
-package com.droiddevstar.quiz.retrofit
+package com.droiddevstar.quiz.network
 
 import com.droiddevstar.quiz.coreapi.JokeModel
-import com.droiddevstar.quiz.network.JokeApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class JokesApiImpl(private val retrofitJokeApi: RetrofitJokeApi) : JokeApi {
+class JokesApiImpl(
+    private val retrofitJokeApi: RetrofitJokeApi
+) : JokeApi {
     override fun fetchJoke(): Flow<JokeModel> = flow {
         emit(retrofitJokeApi.getJoke())
     }
