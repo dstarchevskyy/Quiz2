@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.activity.ComponentActivity
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
-import com.droiddevstar.quiz.network.JokeApi
+import com.droiddevstar.quiz.repository.JokesRepository
 import com.droiddevstar.quiz.root.DefaultRootComponent
 import com.droiddevstar.quiz.root.RootComponent
 import dagger.Module
@@ -32,12 +32,12 @@ object AppModule {
     fun provideRootComponent(
         componentContext: ComponentContext,
         @ApplicationContext appContext: Context,
-        jokeApi: JokeApi
+        jokesRepository: JokesRepository
     ): RootComponent {
         return DefaultRootComponent(
             componentContext = componentContext,
             appContext = appContext,
-            jokeApi = jokeApi
+            jokesRepository = jokesRepository
         )
     }
 }

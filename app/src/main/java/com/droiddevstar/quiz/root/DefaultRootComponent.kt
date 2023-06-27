@@ -14,7 +14,7 @@ import com.droiddevstar.quiz.list.ListComponentImpl
 import com.droiddevstar.quiz.list.ListComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
-import com.droiddevstar.quiz.network.JokeApi
+import com.droiddevstar.quiz.repository.JokesRepository
 import com.droiddevstar.quiz.tutorial.TutorialComponent
 import com.droiddevstar.quiz.tutorial.TutorialComponentImpl
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class DefaultRootComponent @Inject constructor(
     val componentContext: ComponentContext,
     val appContext: Context,
-    val jokeApi: JokeApi
+    val jokesRepository: JokesRepository
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -53,7 +53,9 @@ class DefaultRootComponent @Inject constructor(
             )
         }
 
-    private fun mainComponent(componentContext: ComponentContext): MainScreenComponent = MainScreenComponentImpl(
+    private fun mainComponent(
+        componentContext: ComponentContext
+    ): MainScreenComponent = MainScreenComponentImpl(
         onButtonClicked = { navItem ->
             navigation.push(Config.Tutorial)
         }
@@ -69,7 +71,7 @@ class DefaultRootComponent @Inject constructor(
         ListComponentImpl(
             componentContext = componentContext,
             mainContext = Dispatchers.IO,
-            jokeApi = jokeApi,
+            jokesRepository = jokesRepository,
             onItemSelected = { item: String -> // Supply dependencies and callbacks
                 navigation.push(Config.Details(item = item)) // Push the details component
             },

@@ -74,3 +74,4 @@ rootProject.name = "Quiz"
 include ':app'
 include ':network'
 include ':coreapi'
+include ':repository'

@@ -9,7 +9,7 @@ import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.droiddevstar.quiz.coreapi.JokeModel
-import com.droiddevstar.quiz.network.JokeApi
+import com.droiddevstar.quiz.repository.JokesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
@@ -21,14 +21,14 @@ import kotlin.coroutines.CoroutineContext
 class ListComponentImpl(
     private val componentContext: ComponentContext,
     mainContext: CoroutineContext,
-    private val jokeApi: JokeApi,
+    private val jokesRepository: JokesRepository,
     private val onItemSelected: (item: String) -> Unit,
 ) : ListComponent, ComponentContext by componentContext
 {
     // The scope is automatically cancelled when the component is destroyed
     private val scope = coroutineScope(mainContext + SupervisorJob())
 
-    private val jokeState: MutableState<JokeModel> = mutableStateOf<JokeModel>(JokeModel(""))
+    private val jokeState: MutableState<JokeModel> = mutableStateOf(JokeModel(""))
 
     override val model: Value<ListComponentModel> =
         MutableValue(
@@ -42,23 +42,27 @@ class ListComponentImpl(
     }
 
     override fun onLoadClicked() {
-        println("@@@onLoadClicked()")
-        val jokeFlow: Flow<JokeModel> = jokeApi.fetchJoke()
+        val jokeFlow: Flow<JokeModel> = jokesRepository.getJoke()
 
         scope.launch {
             jokeFlow.collectLatest {
-                println("@@@DefaultListComponent:collectLatest: $it ")
                 jokeState.value = it
             }
         }
     }
 }
 
-fun CoroutineScope(context: CoroutineContext, lifecycle: Lifecycle): CoroutineScope {
+fun CoroutineScope(
+    context: CoroutineContext,
+    lifecycle: Lifecycle
+): CoroutineScope {
     val scope = CoroutineScope(context)
     lifecycle.doOnDestroy(scope::cancel)
     return scope
 }
 
-fun LifecycleOwner.coroutineScope(context: CoroutineContext): CoroutineScope =
-    CoroutineScope(context, lifecycle)
+fun LifecycleOwner.coroutineScope(
+    context: CoroutineContext
+): CoroutineScope {
+    return CoroutineScope(context, lifecycle)
+}
