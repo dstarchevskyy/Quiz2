@@ -22,6 +22,7 @@ import com.droiddevstar.quiz.retrofit.RetrofitJokeApi
 import com.droiddevstar.quiz.root.DefaultRootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,6 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
+@AndroidEntryPoint
 class MainActivity() : ComponentActivity(), CoroutineScope {
     private lateinit var job: Job
 
