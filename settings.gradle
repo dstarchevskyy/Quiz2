@@ -62,6 +62,12 @@ dependencyResolutionManagement {
                     .version('2.46.1')
             library('hiltCompiles', 'com.google.dagger', 'hilt-compiler')
                     .version('2.46.1')
+            library('roomRuntime', 'androidx.room', 'room-runtime')
+                    .version('2.5.2')
+            library('roomCompiler', 'androidx.room', 'room-compiler')
+                    .version('2.5.2')
+            library('roomKtx', 'androidx.room', 'room-ktx')
+                    .version('2.5.2')
         }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

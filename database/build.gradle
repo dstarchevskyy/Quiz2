@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kapt {
+        arguments {arg("room.schemaLocation", "$projectDir/schemas")}
+    }
 }
 
 dependencies {
@@ -41,4 +44,9 @@ dependencies {
 
     implementation(libs.hiltAndroid)
     kapt(libs.hiltCompiles)
+
+    implementation(libs.roomRuntime)
+    implementation(libs.roomKtx)
+    kapt(libs.roomCompiler)
+
 }
