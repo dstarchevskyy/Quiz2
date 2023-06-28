@@ -1,7 +1,9 @@
 package com.droiddevstar.quiz.list
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
@@ -9,6 +11,7 @@ import com.arkivanov.essenty.lifecycle.Lifecycle
 import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.droiddevstar.quiz.coreapi.JokeModel
+import com.droiddevstar.quiz.database.JokeDBModel
 import com.droiddevstar.quiz.repository.JokesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -29,12 +32,15 @@ class ListComponentImpl(
     private val scope = coroutineScope(mainContext + SupervisorJob())
 
     private val jokeState: MutableState<JokeModel> = mutableStateOf(JokeModel(""))
+    private val allJokesState: SnapshotStateList<JokeDBModel> = mutableStateListOf()
 
     override val model: Value<ListComponentModel> =
         MutableValue(
             ListComponentModel(
                 items = List(100) { "Item $it" },
-                stateDate = jokeState)
+                stateDate = jokeState,
+                allJokesState = allJokesState
+            )
         )
 
     override fun onItemClicked(item: String) {
@@ -48,6 +54,8 @@ class ListComponentImpl(
             jokeFlow.collectLatest {
                 jokeState.value = it
             }
+
+            allJokesState.addAll(jokesRepository.getAllJokes())
         }
     }
 }
