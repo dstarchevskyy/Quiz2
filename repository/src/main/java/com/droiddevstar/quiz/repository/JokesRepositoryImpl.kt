@@ -19,7 +19,6 @@ class JokesRepositoryImpl @Inject constructor(
     override fun getJoke(): Flow<JokeModel> {
         return jokeApi.fetchJoke()
             .onEach {
-                println("@@@insert: ${it.joke}")
                 jokesDao.insertJoke(JokeDBModel(joke = it.joke))
             }
             .flowOn(Dispatchers.IO)
@@ -27,7 +26,6 @@ class JokesRepositoryImpl @Inject constructor(
 
     override suspend fun getAllJokes(): List<JokeDBModel> {
         return withContext(Dispatchers.IO) {
-            println("@@@jokesDao: $jokesDao")
             return@withContext jokesDao.getAllJokes()
         }
     }

@@ -5,7 +5,6 @@ class MainScreenComponentImpl(
 ) : MainScreenComponent {
 
     override fun onItemClicked(item: NavItem) {
-        println("@@@MainScreenComponentImpl: $item")
         when(item) {
             NavItem.TUTORIAL -> {
                 onButtonClicked(item)
