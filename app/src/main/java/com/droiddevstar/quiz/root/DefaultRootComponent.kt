@@ -12,6 +12,7 @@ import com.droiddevstar.quiz.details.DefaultDetailsComponent
 import com.droiddevstar.quiz.details.DetailsComponent
 import com.droiddevstar.quiz.domain.GetAllJokesInteractor
 import com.droiddevstar.quiz.domain.GetJokeInteractor
+import com.droiddevstar.quiz.feature_jokes_list.ListComponent
 import com.droiddevstar.quiz.feature_jokes_list.ListComponentImpl
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
@@ -68,8 +69,10 @@ class DefaultRootComponent @Inject constructor(
         componentContext = componentContext,
         appContext = appContext
     )
-    private fun listComponent(componentContext: ComponentContext): com.droiddevstar.quiz.feature_jokes_list.ListComponent =
-        ListComponentImpl(
+    private fun listComponent(
+        componentContext: ComponentContext
+    ): ListComponent {
+        return ListComponentImpl(
             componentContext = componentContext,
             mainContext = Dispatchers.IO,
             getJoke = GetJokeInteractor(
@@ -82,12 +85,17 @@ class DefaultRootComponent @Inject constructor(
                 navigation.push(Config.Details(item = item)) // Push the details component
             },
         )
+    }
 
-    private fun detailsComponent(componentContext: ComponentContext, config: Config.Details): DetailsComponent =
-        DefaultDetailsComponent(
+    private fun detailsComponent(
+        componentContext: ComponentContext,
+        config: Config.Details
+    ): DetailsComponent {
+        return DefaultDetailsComponent(
             componentContext = componentContext,
             item = config.item, // Supply arguments from the configuration
         )
+    }
 
     override fun onBackClicked(toIndex: Int) {
         navigation.popTo(index = toIndex)
