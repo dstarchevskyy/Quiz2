@@ -7,6 +7,6 @@ import com.droiddevstar.quiz.database.JokeDBModel
 
 data class ListComponentModel(
     val items: List<String>,
-    val stateDate: MutableState<JokeModel>,
+    val stateData: MutableState<JokeModel>,
     val allJokesState: SnapshotStateList<JokeDBModel>
 )

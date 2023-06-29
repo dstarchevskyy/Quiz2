@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -22,7 +24,6 @@ import com.droiddevstar.quiz.coreapi.JokeModel
 @Composable
 fun ListContent(
     component: ListComponent,
-    modifier: Modifier = Modifier
 ) {
     val model: State<ListComponentModel> = component.model.subscribeAsState()
 
@@ -32,7 +33,7 @@ fun ListContent(
             Text(text = "Load")
         }
 
-        Text(text = "CURRENT JOKE: ${model.value.stateDate.value.joke}")
+        Text(text = "CURRENT JOKE: ${model.value.stateData.value.joke}")
 
         LazyColumn {
             items(model.value.allJokesState) { item ->
@@ -48,25 +49,29 @@ fun ListContent(
 
 @Preview(showBackground = true)
 @Composable
-fun previewListContent() {
-    ListContent(
-        component = object : ListComponent {
-            @SuppressLint("UnrememberedMutableState")
-            override val model: Value<ListComponentModel> = MutableValue(
-                ListComponentModel(
-                    items = List(100) {
-                        "Item $it"
-                    },
-                    stateDate = mutableStateOf<JokeModel>(JokeModel("")),
-                    allJokesState = mutableStateListOf()
-                )
+fun PreviewListContent() {
+    Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            ListContent(
+                component = object : ListComponent {
+                    @SuppressLint("UnrememberedMutableState")
+                    override val model: Value<ListComponentModel> = MutableValue(
+                        ListComponentModel(
+                            items = List(100) {
+                                "Item $it"
+                            },
+                            stateData = mutableStateOf<JokeModel>(JokeModel("")),
+                            allJokesState = mutableStateListOf()
+                        )
+                    )
+
+                    override fun onItemClicked(item: String) {}
+
+                    override fun onLoadClicked() {}
+
+                },
             )
-
-            override fun onItemClicked(item: String) { }
-
-            override fun onLoadClicked() { }
-
-        },
-        modifier = Modifier
-    )
+        }
 }

@@ -46,6 +46,22 @@ dependencies {
     implementation(libs.androidXLifecycle)
     implementation(libs.androidXActivityCompose)
 
+    implementation platform(libs.composePlatform)
+    implementation(libs.androidXComposeUi)
+    implementation(libs.androidXComposeUiGraphics)
+    implementation(libs.androidXComposeUiToolingPreview)
+    implementation(libs.androidXMaterial3)
+
+    androidTestImplementation(libs.composeTestJUnit)
+    debugImplementation(libs.composeUiTooling)
+    debugImplementation(libs.composeUiTestManifest)
+
+
+    implementation(libs.decompose)
+    implementation(libs.decomposeExtensionsCompose)
+    implementation(libs.decomposeExtensionsAndroid)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidXTestJunit)
     androidTestImplementation(libs.esporesso)
@@ -56,13 +72,6 @@ dependencies {
     implementation(libs.decompose)
     implementation(libs.decomposeExtensionsCompose)
     implementation(libs.decomposeExtensionsAndroid)
-
-    implementation(libs.androidXActivityCompose)
-    implementation platform(libs.composePlatform)
-    implementation(libs.androidXComposeUi)
-    implementation(libs.androidXComposeUiGraphics)
-    implementation(libs.androidXComposeUiToolingPreview)
-    implementation(libs.androidXMaterial3)
 
     implementation(project(':domain'))
 

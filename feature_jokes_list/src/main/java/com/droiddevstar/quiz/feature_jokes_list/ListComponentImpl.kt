@@ -47,7 +47,7 @@ class ListComponentImpl(
         MutableValue(
             ListComponentModel(
                 items = List(100) { "Item $it" },
-                stateDate = jokeState,
+                stateData = jokeState,
                 allJokesState = allJokesState
             )
         )

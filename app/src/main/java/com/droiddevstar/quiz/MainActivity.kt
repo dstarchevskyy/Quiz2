@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.droiddevstar.quiz.root.RootComponent
 import com.droiddevstar.quiz.root.RootContent
 import com.droiddevstar.quiz.ui.theme.QuizTheme
@@ -50,4 +53,10 @@ class MainActivity : ComponentActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() =  Dispatchers.Main + job
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewListContent() {
+    Text(text = "ASDF")
 }
