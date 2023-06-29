@@ -12,7 +12,7 @@ import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.droiddevstar.quiz.coreapi.JokeModel
 import com.droiddevstar.quiz.database.JokeDBModel
-import com.droiddevstar.quiz.repository.JokesRepository
+import com.droiddevstar.quiz.domain.GetJokeInteractor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
@@ -24,7 +24,8 @@ import kotlin.coroutines.CoroutineContext
 class ListComponentImpl(
     private val componentContext: ComponentContext,
     mainContext: CoroutineContext,
-    private val jokesRepository: JokesRepository,
+//    private val jokesRepository: JokesRepository,
+    private val getJoke: GetJokeInteractor,
     private val onItemSelected: (item: String) -> Unit,
 ) : ListComponent, ComponentContext by componentContext
 {
@@ -48,14 +49,14 @@ class ListComponentImpl(
     }
 
     override fun onLoadClicked() {
-        val jokeFlow: Flow<JokeModel> = jokesRepository.getJoke()
+        val jokeFlow: Flow<JokeModel> = getJoke()
 
         scope.launch {
             jokeFlow.collectLatest {
                 jokeState.value = it
             }
 
-            allJokesState.addAll(jokesRepository.getAllJokes())
+//            allJokesState.addAll(jokesRepository.getAllJokes())
         }
     }
 }
