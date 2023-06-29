@@ -12,6 +12,7 @@ import com.arkivanov.essenty.lifecycle.LifecycleOwner
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.droiddevstar.quiz.coreapi.JokeModel
 import com.droiddevstar.quiz.database.JokeDBModel
+import com.droiddevstar.quiz.domain.GetAllJokesInteractor
 import com.droiddevstar.quiz.domain.GetJokeInteractor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -24,8 +25,8 @@ import kotlin.coroutines.CoroutineContext
 class ListComponentImpl(
     private val componentContext: ComponentContext,
     mainContext: CoroutineContext,
-//    private val jokesRepository: JokesRepository,
     private val getJoke: GetJokeInteractor,
+    private val getAllJokes: GetAllJokesInteractor,
     private val onItemSelected: (item: String) -> Unit,
 ) : ListComponent, ComponentContext by componentContext
 {
@@ -34,6 +35,13 @@ class ListComponentImpl(
 
     private val jokeState: MutableState<JokeModel> = mutableStateOf(JokeModel(""))
     private val allJokesState: SnapshotStateList<JokeDBModel> = mutableStateListOf()
+
+    init {
+        scope.launch {
+            val allJokes: List<JokeDBModel> = getAllJokes()
+            allJokesState.addAll(allJokes)
+        }
+    }
 
     override val model: Value<ListComponentModel> =
         MutableValue(
@@ -52,11 +60,9 @@ class ListComponentImpl(
         val jokeFlow: Flow<JokeModel> = getJoke()
 
         scope.launch {
-            jokeFlow.collectLatest {
-                jokeState.value = it
+            jokeFlow.collectLatest { jokeModel ->
+                jokeState.value = jokeModel
             }
-
-//            allJokesState.addAll(jokesRepository.getAllJokes())
         }
     }
 }

@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetJokeInteractor @Inject constructor(
-    private val repository: JokesRepository
+    private val jokesRepository: JokesRepository
 ) {
 
     operator fun invoke(): Flow<JokeModel> {
-        return repository.getJoke()
+        return jokesRepository.getJoke()
     }
 }

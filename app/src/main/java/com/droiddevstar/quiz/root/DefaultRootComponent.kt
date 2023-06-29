@@ -10,6 +10,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.droiddevstar.quiz.details.DefaultDetailsComponent
 import com.droiddevstar.quiz.details.DetailsComponent
+import com.droiddevstar.quiz.domain.GetAllJokesInteractor
 import com.droiddevstar.quiz.domain.GetJokeInteractor
 import com.droiddevstar.quiz.list.ListComponentImpl
 import com.droiddevstar.quiz.list.ListComponent
@@ -73,9 +74,11 @@ class DefaultRootComponent @Inject constructor(
             componentContext = componentContext,
             mainContext = Dispatchers.IO,
             getJoke = GetJokeInteractor(
-                repository = jokesRepository
+                jokesRepository = jokesRepository
             ),
-//            jokesRepository = jokesRepository,
+            getAllJokes = GetAllJokesInteractor(
+                jokesRepository = jokesRepository
+            ),
             onItemSelected = { item: String -> // Supply dependencies and callbacks
                 navigation.push(Config.Details(item = item)) // Push the details component
             },
