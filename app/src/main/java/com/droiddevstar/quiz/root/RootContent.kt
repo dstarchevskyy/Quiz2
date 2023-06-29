@@ -8,7 +8,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.droiddevstar.quiz.details.DetailsContent
-import com.droiddevstar.quiz.list.ListContent
+import com.droiddevstar.quiz.feature_jokes_list.ListContent
 import com.droiddevstar.quiz.main_screen.MainScreen
 import com.droiddevstar.quiz.tutorial.TutorialScreen
 
@@ -25,7 +25,9 @@ fun RootContent(
         when (val child = it.instance) {
             is RootComponentChild.MainChild -> MainScreen(component = child.component)
             is RootComponentChild.TutorialChild -> TutorialScreen()
-            is RootComponentChild.ListChild -> ListContent(component = child.component)
+            is RootComponentChild.ListChild -> com.droiddevstar.quiz.feature_jokes_list.ListContent(
+                component = child.component
+            )
             is RootComponentChild.DetailsChild -> DetailsContent(component = child.component, modifier)
         }
     }

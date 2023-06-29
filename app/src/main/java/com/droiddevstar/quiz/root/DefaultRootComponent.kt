@@ -12,8 +12,7 @@ import com.droiddevstar.quiz.details.DefaultDetailsComponent
 import com.droiddevstar.quiz.details.DetailsComponent
 import com.droiddevstar.quiz.domain.GetAllJokesInteractor
 import com.droiddevstar.quiz.domain.GetJokeInteractor
-import com.droiddevstar.quiz.list.ListComponentImpl
-import com.droiddevstar.quiz.list.ListComponent
+import com.droiddevstar.quiz.feature_jokes_list.ListComponentImpl
 import com.droiddevstar.quiz.main_screen.MainScreenComponent
 import com.droiddevstar.quiz.main_screen.MainScreenComponentImpl
 import com.droiddevstar.quiz.repository.JokesRepository
@@ -69,7 +68,7 @@ class DefaultRootComponent @Inject constructor(
         componentContext = componentContext,
         appContext = appContext
     )
-    private fun listComponent(componentContext: ComponentContext): ListComponent =
+    private fun listComponent(componentContext: ComponentContext): com.droiddevstar.quiz.feature_jokes_list.ListComponent =
         ListComponentImpl(
             componentContext = componentContext,
             mainContext = Dispatchers.IO,

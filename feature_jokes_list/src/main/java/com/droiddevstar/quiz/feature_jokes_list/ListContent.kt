@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz.list
+package com.droiddevstar.quiz.feature_jokes_list
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable

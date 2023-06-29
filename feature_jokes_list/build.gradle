@@ -30,6 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+
 }
 
 dependencies {
@@ -45,5 +52,18 @@ dependencies {
 
     implementation(libs.hiltAndroid)
     kapt(libs.hiltCompiles)
+
+    implementation(libs.decompose)
+    implementation(libs.decomposeExtensionsCompose)
+    implementation(libs.decomposeExtensionsAndroid)
+
+    implementation(libs.androidXActivityCompose)
+    implementation platform(libs.composePlatform)
+    implementation(libs.androidXComposeUi)
+    implementation(libs.androidXComposeUiGraphics)
+    implementation(libs.androidXComposeUiToolingPreview)
+    implementation(libs.androidXMaterial3)
+
+    implementation(project(':domain'))
 
 }

@@ -1,4 +1,4 @@
-package com.droiddevstar.quiz.list
+package com.droiddevstar.quiz.feature_jokes_list
 
 import com.arkivanov.decompose.value.Value
 

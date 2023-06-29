@@ -85,4 +85,5 @@ dependencies {
 
     implementation(project(':network'))
     implementation(project(':domain'))
+    implementation(project(':feature_jokes_list'))
 }
