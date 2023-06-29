@@ -1,6 +1,11 @@
 package com.droiddevstar.quiz.feature_jokes_list
 
 import android.annotation.SuppressLint
+import android.widget.ProgressBar
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,11 +15,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
@@ -40,6 +48,8 @@ fun ListContent(
         ) {
             Text(text = stringResource(id = R.string.load_next_joke))
         }
+
+        CircularProgressAnimated()
 
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -68,6 +78,21 @@ fun ListContent(
             }
         }
     }
+}
+
+@Composable
+private fun CircularProgressAnimated(){
+    val progressValue = 0.75f
+    val infiniteTransition = rememberInfiniteTransition()
+
+    val progressAnimationValue by infiniteTransition.animateFloat(
+        initialValue = 0.0f,
+        targetValue = progressValue,animationSpec = infiniteRepeatable(animation = tween(900)))
+
+    CircularProgressIndicator(
+        progress = progressAnimationValue,
+        modifier = Modifier.padding(16.dp)
+    )
 }
 
 @Preview(showBackground = true)
